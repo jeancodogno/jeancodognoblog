@@ -20,15 +20,19 @@
                             $paged = $_GET['page'];
                         else
                             $paged = 1;
+                        $num_peer_page = 2;
                         $args = array(
                             'post_type' => 'post',
                             'post_status' => 'publish',
-                            'posts_per_page' => '2',
+                            'posts_per_page' => $num_peer_page,
                             'paged' => $paged,
                         );
                         $my_posts = new WP_Query( $args );
                         $resp = new stdClass();
                         if ( $my_posts->have_posts() ){
+                            $total_posts = wp_count_posts()->publish;
+                            $total_pages = ceil($total_posts / $num_peer_page);
+
                             while ( $my_posts->have_posts() ){
                                 $my_posts->the_post();
                                 $category = "";
@@ -73,6 +77,23 @@
                                 </div>
                             </div>
                         </article>
+                        <?php
+                            }
+                            if($total_pages > 1){
+                        ?>
+                        <nav aria-label="Navegação de página exemplo">
+                            <ul class="pagination">
+                                <li class="page-item <?php if($paged-1 <= 0) echo "disabled"; ?>"><a class="page-link" href="?page=<?=$paged-1;?>">Anterior</a></li>
+                                <?php
+                                    for ($i=1; $i <= $total_pages; $i++) { 
+                                ?>
+                                <li class="page-item"><a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a></li>
+                                <?php
+                                    }
+                                ?>
+                                <li class="page-item <?php if($paged >= $total_pages) echo "disabled"; ?>"><a class="page-link" href="?page=<?=$paged+1;?>">Próximo</a></li>
+                            </ul>
+                        </nav>
                         <?php
                             }
                         }else{
