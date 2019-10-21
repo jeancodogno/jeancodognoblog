@@ -302,3 +302,7 @@ blockquote:after {
         -webkit-transform: scaleY(1.0);
     }
 }
+
+.border-radius{
+    border-radius: 7px;
+}

@@ -37,10 +37,10 @@ function custom_theme_setup() {
 add_action( 'after_setup_theme', 'custom_theme_setup' );
 
 
-function returnDataJson($response, $status_code){
+function returnDataJson($response){
 	header('Content-Type: application/json');
 
-	http_response_code($statusCode);
+	http_response_code($response->status_code);
 	echo json_encode($response, true);
 	switch (json_last_error()) {
 		case JSON_ERROR_NONE:
@@ -68,16 +68,17 @@ function returnDataJson($response, $status_code){
 }
 
 
-add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
-add_action('wp_ajax_nopriv_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+add_action('wp_ajax_nopriv_load_posts', 'load_posts_callback');
+add_action('wp_ajax_nopriv_load_post', 'load_post_callback');
+add_action('wp_ajax_nopriv_load_comments', 'load_comments_callback');
 
-function load_posts_by_ajax_callback() {
+function load_posts_callback() {
     check_ajax_referer('load_more_posts', 'security');
     $paged = $_GET['page'];
     $args = array(
         'post_type' => 'post',
         'post_status' => 'publish',
-        'posts_per_page' => '2',
+        'posts_per_page' => '3',
         'paged' => $paged,
     );
     $my_posts = new WP_Query( $args );
@@ -85,18 +86,79 @@ function load_posts_by_ajax_callback() {
     if ( $my_posts->have_posts() ){
         while ( $my_posts->have_posts() ){
             $my_posts->the_post();
+            $category = "";
+            $category_link = get_category_link(get_the_category()[0]->term_id);
+            if(get_the_category()[0]->term_id != 1)
+                $category = get_the_category()[0]->cat_name;
             $d = array();
+            $d['id'] = get_the_ID();
             $d['title'] = get_the_title();
-            $d['resume'] = get_the_excerpt();
+            $d['excerpt'] = get_the_excerpt();
+            $d['category'] = $category;
+            $d['category_link'] = $category_link;
+            $d['link'] = get_the_permalink();
+            $d['author'] = get_the_author();
+            $d['date'] = get_the_date('d M','','',false);
+            $d['time'] = get_the_date('Y-m-d\TH:i:sO','','',false);
+            $d['has_thumb'] = has_post_thumbnail();
+            $d['thumb'] = get_the_post_thumbnail_url();
+            $d['ncomments'] = get_comments_number();
             $resp->data[] = $d;
         }
-        $status_code = 200;
+        $resp->status_code = 200;
     }else{
         $resp->status = "Not Found";
-        $status_code = 204;
+        $resp->status_code = 204;
     }
 
-    returnDataJson($resp, $status_code);
+    returnDataJson($resp);
+}
+
+function load_post_callback() {
+    check_ajax_referer('load_post', 'security');
+    $id_post = $_GET['id_post'];
+    $args = array(
+        'p' => $id_post
+    );
+    $my_posts = new WP_Query( $args );
+    $resp = new stdClass();
+    if ( $my_posts->have_posts() ){
+        $category = "";
+        if(get_the_category()[0]->term_id != 1)
+            $category = get_the_category()[0]->cat_name;
+        $my_posts->the_post();
+        $d = array();
+        $d['id'] = get_the_ID();
+        $d['title'] = get_the_title();
+        $d['content'] = get_the_content();
+        $d['category'] = $category;
+        $d['link'] = get_the_permalink();
+        $d['author'] = get_the_author();
+        $d['date'] = get_the_date('d M','','',false);
+        $d['time'] = get_the_date('Y-m-d\TH:i:sO','','',false);
+        $d['has_thumb'] = has_post_thumbnail();
+        $d['thumb'] = get_the_post_thumbnail_url();
+        $d['ncomments'] = get_comments_number();
+        $resp->data = $d;
+        
+        $resp->status_code = 200;
+    }else{
+        $resp->status = "Not Found";
+        $resp->status_code = 204;
+    }
+
+    returnDataJson($resp);
+}
+
+
+function load_comments_callback(){
+    check_ajax_referer('load_post', 'security');
+    $id_post = $_GET['id_post'];
+    $comments = get_comments( array( 'post_id' => $id_post ) );
+    
+    foreach ( $comments as $comment ) :
+        echo $comment->comment_author;
+    endforeach;
 }
 
 class comment_walker extends Walker_Comment {
