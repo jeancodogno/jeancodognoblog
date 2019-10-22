@@ -14,7 +14,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
         
         <link rel='stylesheet' href='<?=get_template_directory_uri();?>/vendor/fontawesome/css/all.min.css'>
-        <link rel='stylesheet' href='<?=get_template_directory_uri();?>/vendor/bootstrap/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='<?=get_template_directory_uri();?>/vendor/bootstrap/css/bootstrap.css'>
         <link rel="stylesheet" href="<?=get_template_directory_uri();?>/vendor/prism/prism.css">
         <link rel="stylesheet" href="<?=get_template_directory_uri();?>/css/style.css">
 

@@ -20,7 +20,7 @@
                             $paged = $_GET['page'];
                         else
                             $paged = 1;
-                        $num_peer_page = 2;
+                        $num_peer_page = 5;
                         $args = array(
                             'post_type' => 'post',
                             'post_status' => 'publish',
@@ -52,7 +52,21 @@
                             ?>
                             <header class="card-header px-0 pb-0 pt-0">
                                 <div class="card-meta">
-                                    <a  class="post-link" href="<?=get_the_permalink();?>"><time class="post-time" datetime="<?=get_the_date('Y-m-d\TH:i:sO','','',false);?>" data-tid="2"><?=get_the_date('d M','','',false);?></time></a> em <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
+                                    <div class="meta-item">
+                                        <span>Em</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span>Tags:</span> <?php
+                                    $post_tags = get_the_tags();
+                                    if ( $post_tags ) {
+                                    ?>
+                                        <a href=""><?=$post_tags[0]->name;?></a> 
+                                    <?php
+                                        }
+                                    ?></div>
+                                    <div class="meta-item">
+                                        <time class="post-time" datetime="<?=get_the_date('Y-m-d\TH:i:sO','','',false);?>" data-tid="2"><?=get_the_date('d M, Y','','',false);?></time>
+                                    </div>
                                 </div>
                                 <a class="post-link" href="<?=get_the_permalink()?>">
                                     <h3 class="card-title post-title"><?=get_the_title();?></h3>
@@ -87,7 +101,7 @@
                                 <?php
                                     for ($i=1; $i <= $total_pages; $i++) { 
                                 ?>
-                                <li class="page-item"><a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a></li>
+                                <li class="page-item <?php if($i == $paged) echo "active";?> "><a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a></li>
                                 <?php
                                     }
                                 ?>

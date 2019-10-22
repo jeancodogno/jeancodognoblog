@@ -306,3 +306,14 @@ blockquote:after {
 .border-radius{
     border-radius: 7px;
 }
+
+.card-meta{
+    line-height: 30px;
+    display: flex;
+}
+.card-meta .meta-item{
+    color: #666;
+    font-size: 13px;
+    float: left;
+    margin-right: 20px;
+}
