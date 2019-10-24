@@ -5,34 +5,75 @@
     <body>
         <div class="container">
             <div class="row">
-                <section id="loading-posts" class="col-12 col-lg-9 pt-5" style="height: calc(100vh - 105px)">
-                    <div class="spinner">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
-                </section>
-                <section class="col-12 col-lg-9 pt-5 d-none" id="post">
+                <section class="col-12 col-lg-9 pt-5" id="post">
+                <?php
+                    the_post();
+                    $category = "";
+                    if(get_the_category()[0]->term_id != 1)
+                        $category = get_the_category()[0]->cat_name;
+                ?>
                     <article class="card mb-4">
+                        <?php
+                            if(has_post_thumbnail()){
+                        ?>
+                        <a href="<?=get_the_permalink();?>" class="pb-2 post-link post-link-image">
+                            <img src="<?=get_the_post_thumbnail_url();?>" alt="<?=get_the_title();?>" class="border-radius" width="100%"/>
+                        </a>
+                        <?php
+                            }
+                        ?>
                         <header class="card-header px-0 pb-0 pt-0">
                             <div class="card-meta">
-                            <a  class="post-link" href="#"><time class="post-time" datetime="2017-10-03 20:00" data-tid="2"></time></a> em <a class="link-category" href="" rel="category tag"></a>
+                                <div class="meta-item">
+                                    <span>Em</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
+                                </div>
+                                <div class="meta-item">
+                                    <span>Tags:</span> <?php
+                                $post_tags = get_the_tags();
+                                if ( $post_tags ) {
+                                ?>
+                                    <a href=""><?=$post_tags[0]->name;?></a> 
+                                <?php
+                                    }
+                                ?></div>
+                                <div class="meta-item">
+                                    <time class="post-time" datetime="<?=get_the_date('Y-m-d\TH:i:sO','','',false);?>" ><?=get_the_date('d M, Y','','',false);?></time>
+                                </div>
                             </div>
-                            <a class="post-link" href="">
-                                <h3 class="card-title post-title"></h3>
+                            <a class="post-link" href="<?=get_the_permalink()?>">
+                                <h3 class="card-title post-title"><?=get_the_title();?></h3>
                             </a>
                         </header>
                         <div class="card-body px-0 pt-0">
                             <div class="card-text post-content">
-                                
+                                <?=get_the_content();?>
                             </div>
                         </div>
                     </article>
                     <hr/>
                     <div class="card mb-4 pt-3">
+                        <?php
+
+                            function show_comments($id_post, $parent = 0){ 
+                                $comments = get_comments( array( 'post_id' => $id_post, 'parent' => [$parent] ) );
+                                if(count($comments) > 0){
+                                    echo "<ul>";
+                                    foreach ( $comments as $comment ) :
+                                        echo "<li>";
+                                        echo $comment->comment_author;
+                                        echo "<br/>";
+                                        echo $comment->comment_content;
+                                        show_comments($id_post, $parent = $comment->comment_ID);
+                                        echo "</li>";
+                                    endforeach;
+                                    echo "</ul>";
+                                }
+                            }
+
+                            show_comments($id_post);
+                        ?>
                         <h4>Deixe um recado</h4>
+
                         <form action="http://wordpress/wp-comments-post.php" method="post" id="commentform" class="ui form grid">
                             <p class="comment-notes">
                                 <span id="email-notes">O seu endereço de e-mail não será publicado.</span> Campos obrigatórios são marcados com <span class="required">*</span>
@@ -67,6 +108,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </section> 
                 <?php get_template_part('sidebar', get_post_format() );  ?>
@@ -80,6 +122,5 @@
             var security_key = "<?php echo wp_create_nonce("load_post"); ?>";
             var id_post = "<?php echo get_the_ID(); ?>";
         </script>
-        <script type='text/javascript' src='<?=get_template_directory_uri();?>/js/page/main.js'></script>
     </body>
 </html>

@@ -5,15 +5,6 @@
     <body>
         <div class="container">
             <div class="row">
-                <section id="loading-posts" class="col-12 col-lg-9 pt-5 d-none" style="height: calc(100vh - 105px)">
-                    <div class="spinner">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
-                </section>
                 <section class="col-12 col-lg-9 pt-5" id="posts" style="min-height: calc(100vh - 105px)">
                     <?php
                         if(isset($_GET['page']))
@@ -65,7 +56,7 @@
                                         }
                                     ?></div>
                                     <div class="meta-item">
-                                        <time class="post-time" datetime="<?=get_the_date('Y-m-d\TH:i:sO','','',false);?>" data-tid="2"><?=get_the_date('d M, Y','','',false);?></time>
+                                        <time class="post-time" datetime="<?=get_the_date('Y-m-d\TH:i:sO','','',false);?>" ><?=get_the_date('d M, Y','','',false);?></time>
                                     </div>
                                 </div>
                                 <a class="post-link" href="<?=get_the_permalink()?>">
@@ -120,42 +111,5 @@
         </div>
 
         <?php get_footer(); ?>
-            
-        <article class="card mb-4 d-none" id="default-post">
-            <a href="#" class="pb-2 post-link post-link-image">
-            </a>
-            <header class="card-header px-0 pb-0 pt-0">
-                <div class="card-meta">
-                    <a  class="post-link" href="#"><time class="post-time" datetime="2017-10-03 20:00" data-tid="2"></time></a> em <a class="link-category" href="" rel="category tag"></a>
-                </div>
-                <a class="post-link" href="">
-                    <h3 class="card-title post-title"></h3>
-                </a>
-            </header>
-            <div class="card-body px-0 pt-0">
-                <div class="card-text">
-                    <p class="post-excerpt"></p>
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="#" class="card-read-more post-link">                                        
-                                Continue reading
-                            </a>
-                        </div>
-                        <div class="col-6 text-right">
-                                <a href="#" class="no-decoration post-link">
-                                    <i class="far fa-comment-alt"></i>
-                                    <span class="post-ncomments"></span>
-                                </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <script type='text/javascript'>
-            var url_load_posts = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
-            var security_key = "<?php echo wp_create_nonce("load_more_posts"); ?>";
-        </script>
-        <script type='text/javascript' src='<?=get_template_directory_uri();?>/js/index/main.js'></script>
     </body>
 </html>
