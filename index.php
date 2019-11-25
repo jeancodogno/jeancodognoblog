@@ -47,7 +47,7 @@
                                         <span>Em</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
                                     </div>
                                     <div class="meta-item">
-                                        <span>Tags:</span> <?php
+                                        <span><i class="fas fa-tags mr-1"></i>Tags:</span> <?php
                                     $post_tags = get_the_tags();
                                     if ( $post_tags ) {
                                     ?>
@@ -56,7 +56,7 @@
                                         }
                                     ?></div>
                                     <div class="meta-item">
-                                        <time class="post-time" datetime="<?=get_the_date('Y-m-d\TH:i:sO','','',false);?>" ><?=get_the_date('d M, Y','','',false);?></time>
+                                    <i class="fas fa-calendar-day mr-1"></i><time class="post-time" datetime="<?=get_the_date('Y-m-d\TH:i:sO','','',false);?>" ><?=get_the_date('d M, Y','','',false);?></time>
                                     </div>
                                 </div>
                                 <a class="post-link" href="<?=get_the_permalink()?>">
@@ -69,7 +69,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <a href="<?=get_the_permalink()?>" class="card-read-more post-link">                                        
-                                                Continue reading
+                                                Continue lendo...
                                             </a>
                                         </div>
                                         <div class="col-6 text-right">

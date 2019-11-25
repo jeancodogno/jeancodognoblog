@@ -3,7 +3,7 @@ body{
     font-family: Lato, sans-serif;
     font-size: 14px;
     line-height: 1.4em;
-    color: #333333ff;
+    color: #808080;
     background-color: #fff;
     margin: 0 auto;
     visibility: visible!important;
@@ -31,22 +31,24 @@ li{
 li a{
     word-break: normal !important;
 }
+
+ul.group-comment ul.group-comment{
+    margin-left: 60px;
+}
 .list-social li a:hover, .no-decoration:hover{
     list-style: none !important;
     text-decoration: none !important;
 }
 a:hover{
     color: #347844;
-}
-a:hover i:before{
-    color: #347844;
+    text-decoration: none;
 }
 .card {
     border: 0px !important;
 }
 .card-text{
-    font-size: 15px;
-    line-height: 1.65em;
+    font-size: 16px;
+    line-height: 1.5;
     letter-spacing: .1px;
 }
 .card-header{
@@ -54,8 +56,11 @@ a:hover i:before{
     border-bottom: 0px solid;
 }
 .card-title{
-    font-size: 23px;
+    font-size: 3rem;
     font-weight: bold;
+}
+#posts .card-title{
+    font-size: 2.3rem;
 }
 .card-read-more{
     color: #000;
@@ -312,8 +317,113 @@ blockquote:after {
     display: flex;
 }
 .card-meta .meta-item{
-    color: #666;
     font-size: 13px;
     float: left;
     margin-right: 20px;
+}
+
+.card-meta .meta-item a{
+    color: #808080;
+    font-weight: 800;
+}
+
+.screen-reader-text {
+    clip: rect(1px,1px,1px,1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute!important;
+    width: 1px;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 0em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+
+ul{
+    padding-left: 0px;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #2f6a3c;
+    background-color: #2f6a3c;
+}
+
+input textarea{
+    font-size: 14px;
+}
+
+.form-control::-webkit-input-placeholder{color:#999;font-size: 14px;}
+
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(46, 105, 60, 0.25);
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+    color: #fff;
+    background-color: #347844 !important;
+    border-color: #2e693c  !important;
+  }
+
+  .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(46, 105, 60, 0.25);
+}
+
+.btn-fb {
+    background-color: #3b5998 !important;
+}
+
+.btn-tw {
+    background-color: #55acee !important;
+}
+
+.btn-li {
+    background-color: #0082ca !important;
+}
+
+.i-share{
+    color: #333 !important;
+    font-size: 18px;
+}
+
+.btn-floating {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 0;
+    margin: 3px;
+    overflow: hidden;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 37px;
+    height: 37px;
+    padding-left: 10px;
+}
+
+.btn-floating svg {
+    vertical-align: middle;
+    color: #fff;
+}
+
+.comment li{
+    margin-bottom: 25px;
+}
+
+.quick-holder{
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
