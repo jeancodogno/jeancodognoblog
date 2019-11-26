@@ -9,15 +9,15 @@
             </a>
             <div class="d-none d-lg-block ">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item ml-2 active">
+                <li class="nav-item ml-2 <?php if($_SERVER['REQUEST_URI'] == "index.php" || $_SERVER['REQUEST_URI'] == "/") echo "active"; ?>">
                         <a class="nav-link" href="/">HOME</a>
                     </li>
                     <?php 
                         $pages = get_pages();
                         foreach ( $pages as $page ) {
                     ?>
-                    <li class="nav-item ml-2">
-                        <a class="nav-link" href="<?=get_page_link($page->ID);?>"><?=$page->post_title;?></a>
+                    <li class="nav-item ml-2 <?php if(count(explode($page->post_name, $_SERVER['REQUEST_URI'])) > 1){ echo "active"; }?>">
+                        <a class="nav-link " href="<?=get_page_link($page->ID);?>"><?=$page->post_title;?></a>
                     </li>
                     <?php
                         }
