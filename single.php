@@ -5,7 +5,7 @@
     <body>
         <div class="container">
             <div class="row">
-                <section class="col-12 col-lg-9 pt-5" id="post">
+                <section class="col-12 col-lg-9 pt-5" id="post" style="min-height: calc(100vh - 101px);">
                 <?php
                     the_post();
                     $id_post = get_the_ID();
@@ -23,7 +23,7 @@
                         <?php
                             }
                         ?>
-                        <header class="card-header px-0 pb-0 pt-0">
+                        <header class="card-header px-0 pb-2 pt-0">
                             <div class="card-meta">
                                 <div class="meta-item">
                                     <span>Em</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>

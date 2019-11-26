@@ -5,7 +5,7 @@
     <body>
         <div class="container">
             <div class="row">
-                <section class="col-12 col-lg-9 pt-5" id="post">
+                <section class="col-12 col-lg-9 pt-5" id="post" style="min-height: calc(100vh - 101px);">
                 <?php
                     the_post();
                     $id_post = get_the_ID();
@@ -23,6 +23,11 @@
                         <?php
                             }
                         ?>
+                         <header class="card-header px-0 pb-2 pt-0">
+                            <a class="post-link" href="<?=get_the_permalink()?>">
+                                <h3 class="card-title post-title"><?=get_the_title();?></h3>
+                            </a>
+                        </header>
                         <div class="card-body px-0 pt-0">
                             <div class="card-text post-content">
                                 <?=get_the_content();?>
