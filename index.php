@@ -41,10 +41,10 @@
                             <?php
                                 }
                             ?>
-                            <header class="card-header px-0 pb-0 pt-0">
+                            <header class="card-header px-5 pb-0 pt-0">
                                 <div class="card-meta">
                                     <div class="meta-item">
-                                        <span>Em</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
+                                        <span>In</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
                                     </div>
                                     <div class="meta-item">
                                         <span><i class="fas fa-tags mr-1"></i>Tags:</span> <?php
@@ -63,13 +63,13 @@
                                     <h3 class="card-title post-title"><?=get_the_title();?></h3>
                                 </a>
                             </header>
-                            <div class="card-body px-0 pt-0">
+                            <div class="card-body px-5 pt-0">
                                 <div class="card-text">
                                     <p class="post-excerpt"><?=get_the_excerpt();?></p>
                                     <div class="row">
                                         <div class="col-6">
                                             <a href="<?=get_the_permalink()?>" class="card-read-more post-link">                                        
-                                                Continue lendo...
+                                                Continue reading ...
                                             </a>
                                         </div>
                                         <div class="col-6 text-right">
@@ -88,7 +88,7 @@
                         ?>
                         <nav aria-label="Navegação de página exemplo">
                             <ul class="pagination">
-                                <li class="page-item <?php if($paged-1 <= 0) echo "disabled"; ?>"><a class="page-link" href="?page=<?=$paged-1;?>">Anterior</a></li>
+                                <li class="page-item <?php if($paged-1 <= 0) echo "disabled"; ?>"><a class="page-link" href="?page=<?=$paged-1;?>">Prev.</a></li>
                                 <?php
                                     for ($i=1; $i <= $total_pages; $i++) { 
                                 ?>
@@ -96,7 +96,7 @@
                                 <?php
                                     }
                                 ?>
-                                <li class="page-item <?php if($paged >= $total_pages) echo "disabled"; ?>"><a class="page-link" href="?page=<?=$paged+1;?>">Próximo</a></li>
+                                <li class="page-item <?php if($paged >= $total_pages) echo "disabled"; ?>"><a class="page-link" href="?page=<?=$paged+1;?>">Next</a></li>
                             </ul>
                         </nav>
                         <?php

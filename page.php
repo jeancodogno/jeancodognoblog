@@ -23,12 +23,12 @@
                         <?php
                             }
                         ?>
-                         <header class="card-header px-0 pb-2 pt-0">
+                         <header class="card-header px-5 pb-2 pt-0">
                             <a class="post-link" href="<?=get_the_permalink()?>">
                                 <h3 class="card-title post-title"><?=get_the_title();?></h3>
                             </a>
                         </header>
-                        <div class="card-body px-0 pt-0">
+                        <div class="card-body px-5 pt-0">
                             <div class="card-text post-content">
                                 <?=get_the_content();?>
                             </div>

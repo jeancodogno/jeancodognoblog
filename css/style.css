@@ -2,8 +2,8 @@
 body{
     font-family: Lato, sans-serif;
     font-size: 14px;
-    line-height: 1.4em;
-    color: #808080;
+    line-height: 1.5em;
+    color: #444;
     background-color: #fff;
     margin: 0 auto;
     visibility: visible!important;
@@ -13,19 +13,31 @@ body{
     overflow-x: hidden;
     -webkit-tap-highlight-color: rgba(255,255,255,0);
 }
-h4{
-    font-size: 15px;
+
+aside h4{
+    font-size:15px;
 }
+
 h1, h2, h3, h4, h5{
     color: #333;
     font-weight: bold;
 }
-a {
+a{
     color: #333;
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
+
+.card-text p{
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+.card-text p:first-of-type{
+    margin-top: 0px;
+}
+
 li{
     list-style: none;
     word-break: normal !important;
@@ -325,7 +337,6 @@ blockquote:after {
 }
 
 .card-meta .meta-item a{
-    color: #808080;
     font-weight: 800;
 }
 

@@ -23,10 +23,10 @@
                         <?php
                             }
                         ?>
-                        <header class="card-header px-0 pb-2 pt-0">
+                        <header class="card-header px-5 pb-2 pt-0">
                             <div class="card-meta">
                                 <div class="meta-item">
-                                    <span>Em</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
+                                    <span>In</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
                                 </div>
                                 <div class="meta-item">
                                     <span><i class="fas fa-tags mr-1"></i>Tags:</span> <?php
@@ -45,7 +45,7 @@
                                 <h3 class="card-title post-title"><?=get_the_title();?></h3>
                             </a>
                         </header>
-                        <div class="card-body px-0 pt-0">
+                        <div class="card-body px-5 pt-0">
                             <div class="card-text post-content">
                                 <?=get_the_content();?>
                             </div>
@@ -56,8 +56,8 @@
                         </div>
                     </article>
                     <hr class="p-0 m-0"/>
-                    <div class="card mb-4 pt-3">
-                        <h3 class="comments-title title mb-5"> <?=get_comments( array( 'post_id' => $id_post, 'count'=>true));?> comentários <span class="screen-reader-text"><?=get_the_title();?></span></h3>
+                    <div class="card px-5 mb-4 pt-3">
+                        <h3 class="comments-title title mb-5"> <?=get_comments( array( 'post_id' => $id_post, 'count'=>true));?> comments <span class="screen-reader-text"><?=get_the_title();?></span></h3>
                         <?php
 
                             function show_comments($id_post, $parent = 0){ 
@@ -75,7 +75,7 @@
                                         echo "  <div style='margin-left:66px;width:calc(100% - 81px);border-left: 1px solid #ececec;padding-left: 20px;'>";
                                         echo "      <h4 class='comment-author mb-0'>".$comment->comment_author."</h4>";
                                         echo "      <time datetime='".$comment->comment_date_gmt."'>".$date->format('d M, Y')."</time>";
-                                        echo '       - <a rel="nofollow" class="comment-reply-link quick-reply" href="?replytocom='.$comment->comment_ID.'#respond" data-parentid = "'.$comment->comment_parent.'" data-commentid="'.$comment->comment_ID.'" data-postid="'.$comment->comment_post_ID.'" data-belowelement="div-comment-'.$comment->comment_ID.'" data-respondelement="respond" aria-label="Responder para '.$comment->comment_author.'">Responder</a></span>';
+                                        echo '       - <a rel="nofollow" class="comment-reply-link quick-reply" href="?replytocom='.$comment->comment_ID.'#respond" data-parentid = "'.$comment->comment_parent.'" data-commentid="'.$comment->comment_ID.'" data-postid="'.$comment->comment_post_ID.'" data-belowelement="div-comment-'.$comment->comment_ID.'" data-respondelement="respond" aria-label="Reply for '.$comment->comment_author.'">Reply</a></span>';
                                         echo "      <p class='comment-content mt-2'>".$comment->comment_content."</p>";
                                         echo "  </div>";
                                         echo '<div class="quick-holder quick-holder-'.$comment->comment_ID.'"></div>';
@@ -110,7 +110,7 @@
                                         '" size="30" placeholder="Website"/></div></div>',
                                     'cookies' => '<div class="col-12 mt-3 p-0"><div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" checked="' . $consent . '" autocomplete="off">
-                                    <label class="custom-control-label" for="wp-comment-cookies-consent">Salvar meus dados neste navegador para a próxima vez que eu comentar</label>
+                                    <label class="custom-control-label" for="wp-comment-cookies-consent">Save my data for next time.</label>
                                 </div></div>'
                                 
                                 );
