@@ -102,7 +102,7 @@
                         <?php
                             }
                         }else{
-                            echo "Nenhum post encontrado.";
+                            echo "No posts found.";
                         }
                     ?>
                 </section> 

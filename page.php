@@ -34,7 +34,6 @@
                             </div>
                         </div>
                     </article>
-                    <hr class="p-0 m-0"/>
                    
                 </section> 
                 <?php get_template_part('sidebar', get_post_format() );  ?>
