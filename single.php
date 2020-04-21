@@ -2,10 +2,10 @@
     get_header();
     get_template_part('head', get_post_format() ); 
 ?>
-    <body>
+    
         <div class="container">
             <div class="row">
-                <section class="col-12 col-lg-9 pt-5" id="post" style="min-height: calc(100vh - 101px);">
+                <section class="col-12 col-lg-9" id="post">
                 <?php
                     the_post();
                     $id_post = get_the_ID();
@@ -13,17 +13,17 @@
                     if(get_the_category()[0]->term_id != 1)
                         $category = get_the_category()[0]->cat_name;
                 ?>
-                    <article class="card mb-4">
+                    <article class="card mb-0">
                         <?php
                             if(has_post_thumbnail()){
                         ?>
                         <a href="<?=get_the_permalink();?>" class="pb-2 post-link post-link-image">
-                            <img src="<?=get_the_post_thumbnail_url();?>" alt="<?=get_the_title();?>" class="border-radius" width="100%"/>
+                            <img src="<?=get_the_post_thumbnail_url();?>" alt="<?=get_the_title();?>" class="border-radius w-100"/>
                         </a>
                         <?php
                             }
                         ?>
-                        <header class="card-header px-5 pb-2 pt-0">
+                        <header class="card-header pb-2 pt-0">
                             <div class="card-meta">
                                 <div class="meta-item">
                                     <span>In</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
@@ -31,11 +31,13 @@
                                 <div class="meta-item">
                                     <span><i class="fas fa-tags mr-1"></i>Tags:</span> <?php
                                 $post_tags = get_the_tags();
+                                $tags = [];
                                 if ( $post_tags ) {
-                                ?>
-                                    <a href=""><?=$post_tags[0]->name;?></a> 
-                                <?php
+                                    foreach ($post_tags as $key => $value) {
+                                        $tags[] = '<a href="">'.$value->name."</a>";
                                     }
+                                    echo implode(', ', $tags);
+                                }
                                 ?></div>
                                 <div class="meta-item">
                                 <i class="fas fa-calendar-day mr-1"></i><time class="post-time" datetime="<?=get_the_date('Y-m-d\TH:i:sO','','',false);?>" ><?=get_the_date('d M, Y','','',false);?></time>
@@ -44,20 +46,19 @@
                             <a class="post-link" href="<?=get_the_permalink()?>">
                                 <h3 class="card-title post-title"><?=get_the_title();?></h3>
                             </a>
+                            <a class="btn-floating btn-lg waves-effect waves-light" id="btn_facebook"><i class="fab fa-facebook-square"></i></a>
+                            <a class="btn-floating btn-lg waves-effect waves-light" id="btn_twitter"><i class="fab fa-twitter"></i></a>
+                            <a class="btn-floating btn-lg waves-effect waves-light" id="btn_linkedin"><i class="fab fa-linkedin"></i></a>
                         </header>
-                        <div class="card-body px-5 pt-0">
-                            <div class="card-text post-content">
+                        <div class="card-body pt-0">
+                            <div class="card-text post-content mt-3">
                                 <?=get_the_content();?>
                             </div>
-                            <i class="fas fa-share i-share"></i>
-                            <a class="btn-floating btn-fb btn-lg waves-effect waves-light" id="btn_facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn-floating btn-tw btn-lg waves-effect waves-light" id="btn_twitter"><i class="fab fa-twitter"></i></a>
-                            <a class="btn-floating btn-li btn-lg waves-effect waves-light" id="btn_linkedin"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </article>
                     <hr class="p-0 m-0"/>
-                    <div class="card px-5 mb-4 pt-3">
-                        <h3 class="comments-title title mb-5"> <?=get_comments( array( 'post_id' => $id_post, 'count'=>true));?> comments <span class="screen-reader-text"><?=get_the_title();?></span></h3>
+                    <div class="card card-comments mb-4">
+                        <h3 class="comments-title title my-4"> <?=get_comments( array( 'post_id' => $id_post, 'count'=>true));?> comments <span class="screen-reader-text"><?=get_the_title();?></span></h3>
                         <?php
 
                             function show_comments($id_post, $parent = 0){ 
@@ -115,7 +116,7 @@
                                 
                                 );
                                 $title_reply_before = '<h4 id="reply-title" class="comment-reply-title">';
-                                $cancel_reply_before = '<smal class="ml-2">';
+                                $cancel_reply_before = '<span class="ml-3 small">';
                             ?>
                         <?php comment_form($args = array(
 																			'class_form'=>'needs-validation',
@@ -123,6 +124,8 @@
 																			'comment_field'=>$comment_field,
 																			'fields'=>$fields,
 																			'title_reply_before' => $title_reply_before,
+																			'title_reply_after' => '</h4>',
+																			'cancel_reply_after' => '</span>',
                                                                             'cancel_reply_before' => $cancel_reply_before)); ?>
                             </div>
                         </div>
@@ -137,7 +140,7 @@
 
         <?php get_footer(); ?>
             
-        <script type='text/javascript'>
+        <script>
             var url_load_post = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
             var security_key = "<?php echo wp_create_nonce("load_post"); ?>";
             var id_post = "<?php echo get_the_ID(); ?>";

@@ -1,7 +1,23 @@
-<aside class="col-6 col-sm-5 col-md-4 col-lg-3 pt-5 d-lg-block">
+<aside class="col-6 col-sm-5 col-md-4 col-lg-3 d-lg-block">
                     <div style="position: relative;">
-                        <img src="img/perfil.jpg" alt="" width="100%" style="border-radius: 7px;"/>
-                        <h4 class="pt-3">About Jean Codogno</h4>
+                        <ul class="sidenavbar-nav mb-4 pb-2" id="navbar-sidebar">
+                            <li class="sidenav-item mb-2 ml-2 <?php if($_SERVER['REQUEST_URI'] == "index.php" || $_SERVER['REQUEST_URI'] == "/") echo "active"; ?>">
+                                <a class="sidenav-link" href="/">Home</a>
+                            </li>
+                            <?php 
+                                $pages = get_pages();
+                                foreach ( $pages as $page ) {
+                                    $url = get_page_link($page->ID);
+                            ?>
+                            <li class="sidenav-item mb-2 ml-2 <?php if(get_the_ID() == $page->ID){ echo "active"; }?>">
+                                <a class="sidenav-link " href="<?=$url;?>"><?=$page->post_title;?></a>
+                            </li>
+                            <?php
+                                }
+                            ?>
+                        </ul>
+                        <img src="<?=get_template_directory_uri();?>/img/perfil.jpg" alt="Jean Carlo Codogno" class="w-100 border-radius"/>
+                        <h4 class="pt-3">Welcome</h4>
                         <p><?php bloginfo('description'); ?></p>
                         <h4 class="pt-3">Follow Me</h4>
                         

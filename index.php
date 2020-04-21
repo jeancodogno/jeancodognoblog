@@ -5,7 +5,7 @@
     <body>
         <div class="container">
             <div class="row">
-                <section class="col-12 col-lg-9 pt-5" id="posts" style="min-height: calc(100vh - 105px)">
+                <section class="col-12 col-lg-9" id="post">
                     <?php
                         if(isset($_GET['page']))
                             $paged = $_GET['page'];
@@ -36,12 +36,12 @@
                                 if(has_post_thumbnail()){
                             ?>
                             <a href="<?=get_the_permalink();?>" class="pb-2 post-link post-link-image">
-                                <img src="<?=get_the_post_thumbnail_url();?>" alt="<?=get_the_title();?>" class="border-radius" width="100%"/>
+                                <img src="<?=get_the_post_thumbnail_url();?>" alt="<?=get_the_title();?>" class="border-radius w-100"/>
                             </a>
                             <?php
                                 }
                             ?>
-                            <header class="card-header px-5 pb-0 pt-0">
+                            <header class="card-header pb-0 pt-0">
                                 <div class="card-meta">
                                     <div class="meta-item">
                                         <span>In</span> <a class="link-category" href="<?=$category_link;?>" rel="category tag"><?=$category;?></a>
@@ -50,9 +50,11 @@
                                         <span><i class="fas fa-tags mr-1"></i>Tags:</span> <?php
                                     $post_tags = get_the_tags();
                                     if ( $post_tags ) {
-                                    ?>
-                                        <a href=""><?=$post_tags[0]->name;?></a> 
-                                    <?php
+
+                                        foreach ($post_tags as $key => $value) {
+                                            $tags[] = '<a href="">'.$value->name."</a>";
+                                        }
+                                        echo implode(', ', $tags);
                                         }
                                     ?></div>
                                     <div class="meta-item">
@@ -63,7 +65,7 @@
                                     <h3 class="card-title post-title"><?=get_the_title();?></h3>
                                 </a>
                             </header>
-                            <div class="card-body px-5 pt-0">
+                            <div class="card-body pt-0">
                                 <div class="card-text">
                                     <p class="post-excerpt"><?=get_the_excerpt();?></p>
                                     <div class="row">
